@@ -1,14 +1,13 @@
-import React from "react";
+import React from 'react';
 
+// The Header component renders the page's header section
 function Header() {
   return (
     <header>
-      <h1>
-        Plantsy
-        <span className="logo" role="img">
-          🌱
-        </span>
-      </h1>
+      {/* Displaying the title 'Plantsy' with a plant emoji for visual appeal */}
+      <h1>Plantsy <span className="logo" role="img">
+          🌱 {/* This emoji, plant-related icon next to the title */}
+        </span></h1>
     </header>
   );
 }

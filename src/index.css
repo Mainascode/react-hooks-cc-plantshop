@@ -17,10 +17,11 @@ h2 {
 }
 
 button {
-  padding: 0.25rem 1rem;
+  padding: 6px 8px;
   font-family: inherit;
   border: none;
   cursor: pointer;
+  justify-content: left;
 }
 
 button.primary {
@@ -74,7 +75,7 @@ main {
 .searchbar {
   padding: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 label {
