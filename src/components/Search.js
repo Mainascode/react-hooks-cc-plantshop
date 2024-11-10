@@ -1,15 +1,16 @@
-import React from 'react';
+import React from "react";
 
-function Search({ setSearch }) {
+function Search({ searchTerm, onSearchChange }) {
   return (
-    <div>
-      {/* Input field for the search functionality */}
+    <div className="searchbar">
+      <label htmlFor="search">Search Plants:</label>
       <input
         type="text"
-        // Placeholder text for the input
-        placeholder="Search by plant name"  
-        // Event handler to update the 'search' state in the parent component
-        onChange={(e) => setSearch(e.target.value)}  
+        id="search"
+        value={searchTerm}
+        placeholder="Plant name to search..."
+        // Passes the input value to the handler
+        onChange={(e) => onSearchChange(e.target.value)} 
       />
     </div>
   );

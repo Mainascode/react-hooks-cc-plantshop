@@ -1,90 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-// The NewPlantForm component allows users to input data for a new plant
-function NewPlantForm({ addPlant }) {
-  // State variables to store the input values for the plant's name, image, and price
-  // Holds the plant's name
-  const [name, setName] = useState(''); 
-  // Holds the URL for the plant's image
-  const [image, setImage] = useState(''); 
-  // Holds the plant's price
-  const [price, setPrice] = useState(''); 
+// NewPlantForm component to add a new plant
+function NewPlantForm({ onAddPlant }) {
+  // Setting initial state for the form inputs
+  const [formData, setFormData] = useState({
+    // The name of the plant 
+    name: "",   
+    // The image URL for the plant
+    image: "", 
+    // The price of the plant
+    price: "",  
+  });
 
-  // handleSubmit is called when the form is submitted
+  // Function to handle changes in form inputs
+  const handleChange = (e) => {
+    // Get the input name and value
+    const { name, value } = e.target; 
+    // Update form data with the new input value
+    setFormData({ ...formData, [name]: value }); 
+  };
+
+  // Function to handle form submission
   const handleSubmit = (e) => {
-    // Prevents the default form submission behavior (page reload)
-    e.preventDefault();
-
-    // Creating a new plant object using the state values
-    const newPlant = { name, image, price: parseFloat(price) };
-
-    // Calling the addPlant function passed as a prop to add the new plant
-    addPlant(newPlant);
-
-    // Resetting the form fields after submission
-    setName('');
-    setImage('');
-    setPrice('');
+    e.preventDefault(); // Prevent the default form submission
+    onAddPlant(formData); // Pass the form data to the parent (PlantPage) to add the new plant
+    setFormData({ name: "", image: "", price: "" }); // Clear the form inputs after submission
   };
 
   return (
-    // The form element listens for a submit event and triggers handleSubmit
-    <form onSubmit={handleSubmit}>
-      {/* Input field for the plant's name */}
-      <input
-        type="text"
-        // Placeholder text for the input
-        placeholder="Plant name" 
-        // The value of the input is tied to the state variable name
-        value={name} 
-         // Updates the state when the user types
-        onChange={(e) => setName(e.target.value)} 
-        // Makes this field mandatory
-        required 
-      />
-
-
-
-      {/* Input field for the image URL */}
-      <input
-        type="text"
-        // Placeholder text for the input
-        placeholder="Image URL" 
-         // The value of the input is tied to the state variable image
-        value={image} 
-        // Updates the state when the user types
-        onChange={(e) => setImage(e.target.value)}
-        required 
-      />
-
-
-
-
-
-      {/* Input field for the price of the plant */}
-      <input
-       // Ensures only numeric values are entered
-        type="number"
-         // Placeholder text for the input
-        placeholder="Price" 
-        // The value of the input is tied to the state variable price
-        value={price} 
-        // Updates the state when the user types
-        onChange={(e) => setPrice(e.target.value)} 
-        // Makes this field mandatory
-        required 
-      />
-
-
-
-
-      {/* Submit button that triggers the form submission */}
-      <button type="submit">Add Plant</button>
-    </form>
+    <div className="new-plant-form">
+      <h2>New Plant</h2>
+      <form onSubmit={handleSubmit}>
+        {/* Input for the plant name */}
+        <input 
+          type="text" 
+          name="name" 
+          value={formData.name} 
+          onChange={handleChange} 
+          placeholder="Plant name" 
+        />
+        
+        {/* Input for the image URL */}
+        <input 
+          type="text" 
+          name="image" 
+          value={formData.image} 
+          onChange={handleChange} 
+          placeholder="Image URL" 
+        />
+        
+        {/* Input for the price */}
+        <input 
+          type="number" 
+          name="price" 
+          value={formData.price} 
+          onChange={handleChange} 
+          step="0.01" 
+          placeholder="Price" 
+        />
+        
+        {/* Submit button to add the new plant */}
+        <button type="submit">Add Plant</button>
+      </form>
+    </div>
   );
 }
-
-
-
 
 export default NewPlantForm;

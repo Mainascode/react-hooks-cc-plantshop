@@ -1,16 +1,12 @@
-import React from 'react';
-//  CSS for styling the error page
-import './ErrorPage.css'; 
+import React from "react";
 
-const ErrorPage = ({ message, onRetry }) => {
+function ErrorPage({ message }) {
   return (
     <div className="error-page">
-      <h2>Error: {message}</h2>
-      {onRetry && (
-        <button onClick={onRetry}>Retry</button>
-      )}
+      <h2>Oops! Error Retry.</h2>
+      <p>{message || "An unexpected error occurred."}</p>
     </div>
   );
-};
+}
 
 export default ErrorPage;
